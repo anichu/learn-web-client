@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = ({ setLogin }) => {
 	return (
@@ -34,6 +36,23 @@ const Login = ({ setLogin }) => {
 						Signup
 					</button>
 				</p>
+
+				<h3 className="text-2xl text-center my-4 font-semibold">
+					--Or Signin with--
+				</h3>
+
+				<div>
+					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
+						<FcGoogle className="w-6 h-6"></FcGoogle>
+						<span className="text-xl ml-1">Google</span>
+					</button>
+				</div>
+				<div>
+					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
+						<FaGithub className="w-6 h-6"></FaGithub>
+						<span className="text-xl ml-1">Google</span>
+					</button>
+				</div>
 			</form>
 		</div>
 	);
