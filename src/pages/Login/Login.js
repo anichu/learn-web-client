@@ -8,7 +8,8 @@ import { UserContext } from "../../contexts/UserProvider";
 const Login = ({ setLogin }) => {
 	const [error, setError] = useState("");
 
-	const { signIn, setLoading, handleGoogleSignIn } = useContext(UserContext);
+	const { signIn, setLoading, handleGoogleSignIn, handleGithubSignIn } =
+		useContext(UserContext);
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || "/";
@@ -38,6 +39,18 @@ const Login = ({ setLogin }) => {
 
 	const googleSignIn = () => {
 		handleGoogleSignIn()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+				navigate(from, { replace: true });
+			})
+			.catch((error) => {
+				console.error("error: ", error);
+			});
+	};
+
+	const githubSignin = () => {
+		handleGithubSignIn()
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
@@ -84,7 +97,10 @@ const Login = ({ setLogin }) => {
 					</button>
 				</div>
 				<div>
-					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
+					<button
+						onClick={githubSignin}
+						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
+					>
 						<FaGithub className="w-6 h-6"></FaGithub>
 						<span className="text-xl ml-1">Github</span>
 					</button>

@@ -8,8 +8,13 @@ const Register = ({ setLogin }) => {
 	const location = useLocation();
 	const [error, setError] = useState("");
 	const [accepted, setAccepted] = useState(false);
-	const { createUser, updateUserProfile, verifyEmail, handleGoogleSignIn } =
-		useContext(UserContext);
+	const {
+		createUser,
+		updateUserProfile,
+		verifyEmail,
+		handleGithubSignIn,
+		handleGoogleSignIn,
+	} = useContext(UserContext);
 	const from = location.state?.from?.pathname || "/";
 
 	const handleSubmit = (event) => {
@@ -37,6 +42,18 @@ const Register = ({ setLogin }) => {
 
 	const googleSignIn = () => {
 		handleGoogleSignIn()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+				navigate(from, { replace: true });
+			})
+			.catch((error) => {
+				console.error("error: ", error);
+			});
+	};
+
+	const githubSignin = () => {
+		handleGithubSignIn()
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
@@ -117,7 +134,10 @@ const Register = ({ setLogin }) => {
 					</button>
 				</div>
 				<div>
-					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
+					<button
+						onClick={githubSignin}
+						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
+					>
 						<FaGithub className="w-6 h-6"></FaGithub>
 						<span className="text-xl ml-1">Github</span>
 					</button>

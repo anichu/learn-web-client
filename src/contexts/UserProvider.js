@@ -33,6 +33,10 @@ const UserProvider = ({ children }) => {
 		setLoading(true);
 		return signInWithPopup(auth, googleProvider);
 	};
+
+	const handleGithubSignIn = () => {
+		return signInWithPopup(auth, githubProvider);
+	};
 	const createUser = (email, password) => {
 		setLoading(true);
 		return createUserWithEmailAndPassword(auth, email, password);
@@ -78,6 +82,7 @@ const UserProvider = ({ children }) => {
 		createUser,
 		signIn,
 		handleGoogleSignIn,
+		handleGithubSignIn,
 	};
 
 	return (
