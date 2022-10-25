@@ -7,12 +7,13 @@ import { UserContext } from "../../contexts/UserProvider";
 
 const Login = ({ setLogin }) => {
 	const [error, setError] = useState("");
-	const { signIn, setLoading } = useContext(UserContext);
+
+	const { signIn, setLoading, handleGoogleSignIn } = useContext(UserContext);
 	const navigate = useNavigate();
 	const location = useLocation();
+	const from = location.state?.from?.pathname || "/";
 
 	const handleSubmit = (event) => {
-		const from = location.state?.from?.pathname || "/";
 		event.preventDefault();
 		const form = event.target;
 		const email = form.email.value;
@@ -32,6 +33,18 @@ const Login = ({ setLogin }) => {
 			})
 			.finally(() => {
 				setLoading(false);
+			});
+	};
+
+	const googleSignIn = () => {
+		handleGoogleSignIn()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+				navigate(from, { replace: true });
+			})
+			.catch((error) => {
+				console.error("error: ", error);
 			});
 	};
 	return (
@@ -62,7 +75,10 @@ const Login = ({ setLogin }) => {
 				</h3>
 
 				<div>
-					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
+					<button
+						onClick={googleSignIn}
+						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
+					>
 						<FcGoogle className="w-6 h-6"></FcGoogle>
 						<span className="text-xl ml-1">Google</span>
 					</button>
@@ -70,7 +86,7 @@ const Login = ({ setLogin }) => {
 				<div>
 					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
 						<FaGithub className="w-6 h-6"></FaGithub>
-						<span className="text-xl ml-1">Google</span>
+						<span className="text-xl ml-1">Github</span>
 					</button>
 				</div>
 

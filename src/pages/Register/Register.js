@@ -2,11 +2,15 @@ import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { UserContext } from "../../contexts/UserProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 const Register = ({ setLogin }) => {
+	const navigate = useNavigate();
+	const location = useLocation();
 	const [error, setError] = useState("");
 	const [accepted, setAccepted] = useState(false);
-	const { createUser, updateUserProfile, verifyEmail } =
+	const { createUser, updateUserProfile, verifyEmail, handleGoogleSignIn } =
 		useContext(UserContext);
+	const from = location.state?.from?.pathname || "/";
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -28,6 +32,18 @@ const Register = ({ setLogin }) => {
 			.catch((e) => {
 				console.error(e);
 				setError(e.message);
+			});
+	};
+
+	const googleSignIn = () => {
+		handleGoogleSignIn()
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+				navigate(from, { replace: true });
+			})
+			.catch((error) => {
+				console.error("error: ", error);
 			});
 	};
 
@@ -92,7 +108,10 @@ const Register = ({ setLogin }) => {
 				</h3>
 
 				<div>
-					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
+					<button
+						onClick={googleSignIn}
+						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
+					>
 						<FcGoogle className="w-6 h-6"></FcGoogle>
 						<span className="text-xl ml-1">Google</span>
 					</button>
@@ -100,7 +119,7 @@ const Register = ({ setLogin }) => {
 				<div>
 					<button className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2">
 						<FaGithub className="w-6 h-6"></FaGithub>
-						<span className="text-xl ml-1">Google</span>
+						<span className="text-xl ml-1">Github</span>
 					</button>
 				</div>
 				<p className="mt-3">
