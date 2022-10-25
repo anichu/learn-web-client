@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { UserContext } from "../../contexts/UserProvider";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const Register = ({ setLogin }) => {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -25,6 +25,11 @@ const Register = ({ setLogin }) => {
 		const email = form.email.value;
 		const password = form.password.value;
 
+		if (password.length < 6) {
+			setError("Password should be at least 6 characters");
+			return;
+		}
+
 		createUser(email, password)
 			.then((result) => {
 				const user = result.user;
@@ -32,7 +37,7 @@ const Register = ({ setLogin }) => {
 				setError("");
 				form.reset();
 				handleUpdateUserProfile(username, photoUrl);
-				handleEmailVerification();
+				navigate(from, { replace: true });
 			})
 			.catch((e) => {
 				console.error(e);
@@ -45,10 +50,13 @@ const Register = ({ setLogin }) => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
+				setError("");
+
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
-				console.error("error: ", error);
+				console.error("error: ", error.message);
+				setError(error.message);
 			});
 	};
 
@@ -57,10 +65,13 @@ const Register = ({ setLogin }) => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
+				setError("");
+
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
-				console.error("error: ", error);
+				console.error("error: ", error.message);
+				setError(error.message);
 			});
 	};
 
@@ -87,13 +98,18 @@ const Register = ({ setLogin }) => {
 
 	return (
 		<div className="w-full">
-			<form onSubmit={handleSubmit} className="w-1/3 mx-auto my-10">
-				<h1 className="text-center text-4xl mb-6">Create an account</h1>
+			{error && (
+				<p className="text-center mt-3 text-2xl text-red-600 font-semibold">
+					{error}
+				</p>
+			)}
+			<form onSubmit={handleSubmit} className="w-1/3 mx-auto mb-10">
+				<h1 className="text-center text-4xl mb-6 mt-3">Create an account</h1>
 				<div>
 					<label className="block my-3 font-semibold" htmlFor="username">
 						Username
 					</label>
-					<input className="w-full" type="text" name="username" />
+					<input className="w-full" required type="text" name="username" />
 				</div>
 				<div>
 					<label className="block my-3 font-semibold" htmlFor="username">
@@ -105,13 +121,13 @@ const Register = ({ setLogin }) => {
 					<label className="block my-3 font-semibold" htmlFor="email">
 						Email
 					</label>
-					<input className="w-full" type="email" name="email" />
+					<input className="w-full" type="email" required name="email" />
 				</div>
 				<div>
 					<label className="block my-3" htmlFor="password">
 						Passowrd
 					</label>
-					<input className="w-full" type="password" name="password" />
+					<input className="w-full" type="password" required name="password" />
 				</div>
 				<button
 					type="submit"
@@ -144,13 +160,12 @@ const Register = ({ setLogin }) => {
 				</div>
 				<p className="mt-3">
 					Already have an account?{" "}
-					<button
-						className="text-2xl font-bold text-[#1F2937]"
-						onClick={() => setLogin((prev) => !prev)}
+					<Link
+						to="/login"
+						className="bg-purple-700 px-4 rounded-md py-1 text-white"
 					>
-						{" "}
 						Login
-					</button>
+					</Link>
 				</p>
 			</form>
 		</div>

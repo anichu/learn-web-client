@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserProvider";
 
 const Login = ({ setLogin }) => {
@@ -43,9 +43,11 @@ const Login = ({ setLogin }) => {
 				const user = result.user;
 				console.log(user);
 				navigate(from, { replace: true });
+				setError("");
 			})
 			.catch((error) => {
 				console.error("error: ", error);
+				setError(error.message);
 			});
 	};
 
@@ -54,14 +56,21 @@ const Login = ({ setLogin }) => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
+				setError("");
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
+				setError(error.message);
 				console.error("error: ", error);
 			});
 	};
 	return (
 		<div className="w-full">
+			{error && (
+				<p className="text-center mt-3 text-2xl text-red-600 font-semibold">
+					{error}
+				</p>
+			)}
 			<form onSubmit={handleSubmit} className="w-1/3 mx-auto my-10">
 				<h1 className="text-center text-4xl mb-6">Login</h1>
 				<div>
@@ -108,13 +117,12 @@ const Login = ({ setLogin }) => {
 
 				<p className="mt-3">
 					Don’t have an account yet?{" "}
-					<button
-						className="text-2xl font-bold text-[#1F2937]"
-						onClick={() => setLogin((prev) => !prev)}
+					<Link
+						to="/register"
+						className="bg-purple-700 px-4 rounded-md py-1 text-white"
 					>
-						{" "}
 						Signup
-					</button>
+					</Link>
 				</p>
 			</form>
 		</div>
