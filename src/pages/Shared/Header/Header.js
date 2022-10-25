@@ -7,9 +7,13 @@ import { ImSun } from "react-icons/im";
 import { HiMoon } from "react-icons/hi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../../contexts/UserProvider";
+import ReactTooltip from "react-tooltip";
 
 const Header = () => {
 	const [dark, setDark] = useState(true);
+	const { user, logOut } = useContext(UserContext);
 	function classNames(...classes) {
 		return classes.filter(Boolean).join(" ");
 	}
@@ -80,87 +84,51 @@ const Header = () => {
 											>
 												FAQ
 											</a>
-											<Link
-												to="/login"
-												className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
-											>
-												Login
-											</Link>
-											<a
-												href="#"
-												className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
-											>
-												Register
-											</a>
+											{user && user?.uid && (
+												<button
+													onClick={logOut}
+													className="bg-purple-600 px-5 text-white rounded-md"
+												>
+													logout
+												</button>
+											)}
 										</div>
 									</div>
 								</div>
 
 								<div className="absolute inset-y-0 right-0 flex items-center  pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 									{/* Profile dropdown */}
-									<Menu as="div" className="relative ml-3">
-										<div>
-											<Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-												<span className="sr-only">Open user menu</span>
-												<img
-													className="h-8 w-8 rounded-full"
-													src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-													alt=""
-												/>
-											</Menu.Button>
-										</div>
-										<Transition
-											as={Fragment}
-											enter="transition ease-out duration-100"
-											enterFrom="transform opacity-0 scale-95"
-											enterTo="transform opacity-100 scale-100"
-											leave="transition ease-in duration-75"
-											leaveFrom="transform opacity-100 scale-100"
-											leaveTo="transform opacity-0 scale-95"
+									{user?.uid ? (
+										<Menu as="div" className="relative ml-3">
+											<div>
+												<Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+													<span className="sr-only">Open user menu</span>
+													<img
+														data-tip
+														data-for="registerTip"
+														className="h-8 w-8 rounded-full"
+														src={user.photoURL}
+														alt=""
+													/>
+												</Menu.Button>
+												<ReactTooltip
+													id="registerTip"
+													place="top"
+													effect="solid"
+												>
+													{user.displayName}
+												</ReactTooltip>
+											</div>
+										</Menu>
+									) : (
+										<Link
+											to="/login"
+											className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
 										>
-											<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-												<Menu.Item>
-													{({ active }) => (
-														<a
-															href="#"
-															className={classNames(
-																active ? "bg-gray-100" : "",
-																"block px-4 py-2 text-sm text-gray-700"
-															)}
-														>
-															Your Profile
-														</a>
-													)}
-												</Menu.Item>
-												<Menu.Item>
-													{({ active }) => (
-														<a
-															href="#"
-															className={classNames(
-																active ? "bg-gray-100" : "",
-																"block px-4 py-2 text-sm text-gray-700"
-															)}
-														>
-															Settings
-														</a>
-													)}
-												</Menu.Item>
-												<Menu.Item>
-													{({ active }) => (
-														<a
-															href="#"
-															className={classNames(
-																active ? "bg-gray-100" : "",
-																"block px-4 py-2 text-sm text-gray-700"
-															)}
-														>
-															Sign out
-														</a>
-													)}
-												</Menu.Item>
-											</Menu.Items>
-										</Transition>
-									</Menu>
+											Login
+										</Link>
+									)}
+
 									<div className="ml-10 flex items-center  text-white">
 										<button
 											className="transition-all"
@@ -203,35 +171,21 @@ const Header = () => {
 								>
 									FAQ
 								</a>
-								<a
-									href="#"
-									className=" block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-								>
-									Login
-								</a>
-								<a
-									href="#"
-									className=" block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-								>
-									Register
-								</a>
-
-								{/* {navigation.map((item) => (
-									<Disclosure.Button
-										key={item.name}
-										as="a"
-										href={item.href}
-										className={classNames(
-											item.current
-												? " text-white"
-												: "text-gray-300 hover:bg-gray-700 hover:text-white",
-											"block px-3 py-2 rounded-md text-base font-medium"
-										)}
-										aria-current={item.current ? "page" : undefined}
+								{user?.uid ? (
+									<button
+										onClick={logOut}
+										className="bg-purple-600 block w-full px-5 py-2 text-white rounded-md"
 									>
-										{item.name}
-									</Disclosure.Button>
-								))} */}
+										logout
+									</button>
+								) : (
+									<Link
+										to="/login"
+										className=" block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+									>
+										Login
+									</Link>
+								)}
 							</div>
 						</Disclosure.Panel>
 					</>
