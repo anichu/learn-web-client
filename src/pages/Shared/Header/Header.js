@@ -1,11 +1,12 @@
 import React from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import lw from "../../../learn-web.png";
 import { ImSun } from "react-icons/im";
 import { HiMoon } from "react-icons/hi";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 	const [dark, setDark] = useState(true);
@@ -55,12 +56,12 @@ const Header = () => {
 									</div>
 									<div className="hidden sm:ml-6 sm:block">
 										<div className="flex ml-10 space-x-4">
-											<a
-												href="#"
+											<Link
+												to="/"
 												className=" bg-gray-900 px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
 											>
 												Home
-											</a>
+											</Link>
 											<a
 												href="#"
 												className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
@@ -79,12 +80,12 @@ const Header = () => {
 											>
 												FAQ
 											</a>
-											<a
-												href="#"
+											<Link
+												to="/login"
 												className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
 											>
 												Login
-											</a>
+											</Link>
 											<a
 												href="#"
 												className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
