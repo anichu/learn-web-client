@@ -65,7 +65,6 @@ const Register = ({ setLogin }) => {
 				// const user = result.user;
 				// console.log(user);
 				setError("");
-
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
