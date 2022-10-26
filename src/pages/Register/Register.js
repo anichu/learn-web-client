@@ -99,12 +99,12 @@ const Register = ({ setLogin }) => {
 	return (
 		<div className="w-full">
 			{error && (
-				<p className="text-center mt-3 text-2xl text-red-600 font-semibold">
+				<p className="mt-3 text-2xl font-semibold text-center text-red-600">
 					{error}
 				</p>
 			)}
 			<form onSubmit={handleSubmit} className="w-1/3 mx-auto mb-10">
-				<h1 className="text-center text-4xl mb-6 mt-3">Create an account</h1>
+				<h1 className="mt-3 mb-6 text-4xl text-center">Create an account</h1>
 				<div>
 					<label className="block my-3 font-semibold" htmlFor="username">
 						Username
@@ -136,7 +136,7 @@ const Register = ({ setLogin }) => {
 					Signup
 				</button>
 
-				<h3 className="text-2xl text-center my-4 font-semibold">
+				<h3 className="my-4 text-2xl font-semibold text-center">
 					--Or Signup with--
 				</h3>
 
@@ -146,7 +146,7 @@ const Register = ({ setLogin }) => {
 						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
 					>
 						<FcGoogle className="w-6 h-6"></FcGoogle>
-						<span className="text-xl ml-1">Google</span>
+						<span className="ml-1 text-xl">Google</span>
 					</button>
 				</div>
 				<div>
@@ -155,14 +155,14 @@ const Register = ({ setLogin }) => {
 						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
 					>
 						<FaGithub className="w-6 h-6"></FaGithub>
-						<span className="text-xl ml-1">Github</span>
+						<span className="ml-1 text-xl">Github</span>
 					</button>
 				</div>
 				<p className="mt-3">
 					Already have an account?{" "}
 					<Link
 						to="/login"
-						className="bg-purple-700 px-4 rounded-md py-1 text-white"
+						className="px-4 py-1 text-white bg-purple-700 rounded-md"
 					>
 						Login
 					</Link>
