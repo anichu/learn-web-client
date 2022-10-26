@@ -32,8 +32,8 @@ const Register = ({ setLogin }) => {
 
 		createUser(email, password)
 			.then((result) => {
-				const user = result.user;
-				console.log(user);
+				// const user = result.user;
+				// console.log(user);
 				setError("");
 				form.reset();
 				handleUpdateUserProfile(username, photoUrl);
@@ -48,10 +48,9 @@ const Register = ({ setLogin }) => {
 	const googleSignIn = () => {
 		handleGoogleSignIn()
 			.then((result) => {
-				const user = result.user;
-				console.log(user);
+				// const user = result.user;
+				// console.log(user);
 				setError("");
-
 				navigate(from, { replace: true });
 			})
 			.catch((error) => {
@@ -63,8 +62,8 @@ const Register = ({ setLogin }) => {
 	const githubSignin = () => {
 		handleGithubSignIn()
 			.then((result) => {
-				const user = result.user;
-				console.log(user);
+				// const user = result.user;
+				// console.log(user);
 				setError("");
 
 				navigate(from, { replace: true });

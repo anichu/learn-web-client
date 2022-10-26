@@ -3,6 +3,7 @@ import Pdf from "react-to-pdf";
 import { Link, useLoaderData } from "react-router-dom";
 import { HiCheck } from "react-icons/hi2";
 import { HiDocumentDownload } from "react-icons/hi";
+import PrivateRoute from "../../Routes/PrivateRoute";
 
 const CourseDetails = () => {
 	const ref = React.createRef();
@@ -58,7 +59,7 @@ const CourseDetails = () => {
 				{description}
 			</p>
 			<div className="my-10 text-center">
-				<Link to="">
+				<Link to="/checkout">
 					<button className="px-5 py-3 text-white bg-purple-900">
 						Get Premium Access
 					</button>

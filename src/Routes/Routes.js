@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import Courses from "../Layout/Courses";
 import Main from "../Layout/Main";
+import Checkout from "../pages/Checkout/Checkout";
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Cards from "../pages/Shared/Cards/Cards";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
 	{
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
 					);
 				},
 				element: <CourseDetails></CourseDetails>,
+			},
+			{
+				path: "/checkout",
+				element: (
+					<PrivateRoute>
+						<Checkout></Checkout>
+					</PrivateRoute>
+				),
 			},
 		],
 	},

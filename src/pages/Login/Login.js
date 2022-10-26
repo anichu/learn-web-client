@@ -6,12 +6,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserProvider";
 
 const Login = ({ setLogin }) => {
+	const navigate = useNavigate();
+	const location = useLocation();
 	const [error, setError] = useState("");
 
 	const { signIn, setLoading, handleGoogleSignIn, handleGithubSignIn } =
 		useContext(UserContext);
-	const navigate = useNavigate();
-	const location = useLocation();
 	const from = location.state?.from?.pathname || "/";
 
 	const handleSubmit = (event) => {
@@ -42,8 +42,9 @@ const Login = ({ setLogin }) => {
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
-				navigate(from, { replace: true });
+				console.log("anis", from);
 				setError("");
+				navigate(from, { replace: true });
 			})
 			.catch((error) => {
 				console.error("error: ", error);
@@ -67,12 +68,12 @@ const Login = ({ setLogin }) => {
 	return (
 		<div className="w-full">
 			{error && (
-				<p className="text-center mt-3 text-2xl text-red-600 font-semibold">
+				<p className="mt-3 text-2xl font-semibold text-center text-red-600">
 					{error}
 				</p>
 			)}
 			<form onSubmit={handleSubmit} className="w-1/3 mx-auto my-10">
-				<h1 className="text-center text-4xl mb-6">Login</h1>
+				<h1 className="mb-6 text-4xl text-center">Login</h1>
 				<div>
 					<label className="block my-3 font-semibold" htmlFor="email">
 						Email
@@ -92,7 +93,7 @@ const Login = ({ setLogin }) => {
 					Login
 				</button>
 
-				<h3 className="text-2xl text-center my-4 font-semibold">
+				<h3 className="my-4 text-2xl font-semibold text-center">
 					--Or Signin with--
 				</h3>
 
@@ -102,7 +103,7 @@ const Login = ({ setLogin }) => {
 						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
 					>
 						<FcGoogle className="w-6 h-6"></FcGoogle>
-						<span className="text-xl ml-1">Google</span>
+						<span className="ml-1 text-xl">Google</span>
 					</button>
 				</div>
 				<div>
@@ -111,7 +112,7 @@ const Login = ({ setLogin }) => {
 						className="w-full flex items-center justify-center mt-5 bg-[#1F2937] hover:bg-[#131d2b] text-white py-2"
 					>
 						<FaGithub className="w-6 h-6"></FaGithub>
-						<span className="text-xl ml-1">Github</span>
+						<span className="ml-1 text-xl">Github</span>
 					</button>
 				</div>
 
@@ -119,7 +120,7 @@ const Login = ({ setLogin }) => {
 					Don’t have an account yet?{" "}
 					<Link
 						to="/register"
-						className="bg-purple-700 px-4 rounded-md py-1 text-white"
+						className="px-4 py-1 text-white bg-purple-700 rounded-md"
 					>
 						Signup
 					</Link>
