@@ -1,12 +1,18 @@
-# Developer  quiz website
-Live website link: [https://sensational-tulumba-94785d.netlify.app/home](https://sensational-tulumba-94785d.netlify.app/home)
+# LearnWeb website
+Live website link: [https://jovial-bavarois-23bddd.netlify.app/](https://jovial-bavarois-23bddd.netlify.app/)
 
 # Overview
-* this website is a quiz-based website where you can check your knowledge about web development and also programming.
-* It has lots of quizzes about programming such as javascript, react, etc.
+* this website is a learning-based website where you can learn about web development and also programming.
+* It has lots of courses about programming such as javascript, react,nodejs,php,mern etc.
 * You also can obtain knowledge by reading the blog of this website
-* It has statistics section which show the statics of total question of the topic.
-* It has a statistics section that shows the statics of the total question of the topic.
+* It may help you to be a full stack developer.
+
+# Technologies Usage
+* React
+* Nodejs
+* React-tooltip library
+* tailwind
+* firebase
 
 ## Available Scripts
 
