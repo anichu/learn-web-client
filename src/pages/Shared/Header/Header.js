@@ -71,12 +71,12 @@ const Header = () => {
 											>
 												Courses
 											</Link>
-											<a
-												href="#"
+											<Link
+												to="/blog"
 												className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
 											>
 												Blog
-											</a>
+											</Link>
 											<a
 												href="#"
 												className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
