@@ -66,12 +66,12 @@ const Header = () => {
 											>
 												Home
 											</Link>
-											<a
-												href="#"
+											<Link
+												to="/courses"
 												className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
 											>
 												Courses
-											</a>
+											</Link>
 											<a
 												href="#"
 												className=" px-3 py-2 rounded-md text-sm font-medium  text-gray-300 hover:bg-gray-700 hover:text-white"
