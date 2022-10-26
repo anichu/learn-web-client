@@ -77,12 +77,12 @@ const Header = () => {
 											>
 												Blog
 											</Link>
-											<a
-												href="#"
+											<Link
+												to="/faq"
 												className="px-3 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
 											>
 												FAQ
-											</a>
+											</Link>
 											{user && user?.uid && (
 												<>
 													<button
