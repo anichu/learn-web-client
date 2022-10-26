@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Category from "../pages/Shared/Category/Category";
 
 const Courses = () => {
 	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
-		fetch("http://localhost:5000/categories")
+		fetch("https://learn-web-server-ten.vercel.app/categories")
 			.then((res) => res.json())
 			.then((data) => setCategories(data))
 			.catch((err) => {
@@ -18,8 +18,8 @@ const Courses = () => {
 
 	return (
 		<div className="mx-5 my-5">
-			<div className="flex w-full">
-				<div className="left-side  w-[200px]">
+			<div className="sm:flex">
+				<div className="left-side sm:w-[200px]">
 					{categories.map((category) => {
 						return <Category category={category} key={category.id}></Category>;
 					})}

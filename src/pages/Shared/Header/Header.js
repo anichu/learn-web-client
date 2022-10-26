@@ -1,6 +1,6 @@
 import React from "react";
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure, Menu } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import lw from "../../../learn-web.png";
 import { ImSun } from "react-icons/im";
@@ -9,7 +9,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../../contexts/UserProvider";
-import { FaUserAlt } from "react-icons/fa";
 
 import ReactTooltip from "react-tooltip";
 
@@ -24,7 +23,7 @@ const Header = () => {
 					<>
 						<div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
 							<div className="relative flex items-center justify-between h-16">
-								<div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+								<div className="absolute inset-y-0 left-0 flex items-center md:hidden">
 									{/* Mobile menu button*/}
 									<Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
 										<span className="sr-only">Open main menu</span>
@@ -35,7 +34,7 @@ const Header = () => {
 										)}
 									</Disclosure.Button>
 								</div>
-								<div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+								<div className="flex items-center justify-center flex-1 md:items-stretch md:justify-start">
 									<div className="flex items-center flex-shrink-0">
 										<div className="flex items-center">
 											<img
@@ -57,8 +56,8 @@ const Header = () => {
 											LearnWeb
 										</span>
 									</div>
-									<div className="hidden sm:ml-6 sm:block">
-										<div className="flex ml-10 space-x-4">
+									<div className="hidden sm:ml-6 md:block">
+										<div className="flex ml-0 space-x-4 sm:ml-5 lg:ml-10 ">
 											<Link
 												to="/"
 												className="px-3 py-2 text-sm font-medium text-gray-300 bg-gray-900 rounded-md hover:bg-gray-700 hover:text-white"
@@ -120,7 +119,7 @@ const Header = () => {
 													place="top"
 													effect="solid"
 												>
-													{user.displayName}
+													{user?.displayName}
 												</ReactTooltip>
 											</div>
 										</Menu>
@@ -133,7 +132,7 @@ const Header = () => {
 										</Link>
 									)}
 
-									<div className="flex items-center ml-10 text-white">
+									<div className="flex items-center ml-5 text-white lg:ml-10">
 										<button
 											className="transition-all"
 											onClick={() => setDark((prev) => !prev)}
@@ -149,32 +148,32 @@ const Header = () => {
 							</div>
 						</div>
 
-						<Disclosure.Panel className="sm:hidden">
+						<Disclosure.Panel className="md:hidden">
 							<div className="px-2 pt-2 pb-3 space-y-1">
-								<a
-									href="#"
+								<Link
+									to="/"
 									className="block px-3 py-2 text-base font-medium text-gray-300 bg-gray-900 rounded-md hover:bg-gray-700 hover:text-white"
 								>
 									Home
-								</a>
-								<a
-									href="#"
+								</Link>
+								<Link
+									to="/courses"
 									className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
 								>
 									Courses
-								</a>
-								<a
-									href="#"
+								</Link>
+								<Link
+									to="/blog"
 									className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
 								>
 									Blog
-								</a>
-								<a
-									href="#"
+								</Link>
+								<Link
+									to="/faq"
 									className="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
 								>
 									FAQ
-								</a>
+								</Link>
 								{user?.uid ? (
 									<button
 										onClick={logOut}

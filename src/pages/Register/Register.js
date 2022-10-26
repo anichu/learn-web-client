@@ -7,11 +7,9 @@ const Register = ({ setLogin }) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [error, setError] = useState("");
-	const [accepted, setAccepted] = useState(false);
 	const {
 		createUser,
 		updateUserProfile,
-		verifyEmail,
 		handleGithubSignIn,
 		handleGoogleSignIn,
 	} = useContext(UserContext);
@@ -62,8 +60,6 @@ const Register = ({ setLogin }) => {
 	const githubSignin = () => {
 		handleGithubSignIn()
 			.then((result) => {
-				// const user = result.user;
-				// console.log(user);
 				setError("");
 				navigate(from, { replace: true });
 			})
@@ -84,16 +80,6 @@ const Register = ({ setLogin }) => {
 			.catch((error) => console.error(error));
 	};
 
-	const handleEmailVerification = () => {
-		verifyEmail()
-			.then(() => {})
-			.catch((error) => console.error(error));
-	};
-
-	const handleAccepted = (event) => {
-		setAccepted(event.target.checked);
-	};
-
 	return (
 		<div className="w-full">
 			{error && (
@@ -101,7 +87,10 @@ const Register = ({ setLogin }) => {
 					{error}
 				</p>
 			)}
-			<form onSubmit={handleSubmit} className="w-1/3 mx-auto mb-10">
+			<form
+				onSubmit={handleSubmit}
+				className="w-full px-10 my-10 sm:mx-auto sm:w-1/2"
+			>
 				<h1 className="mt-3 mb-6 text-4xl text-center">Create an account</h1>
 				<div>
 					<label className="block my-3 font-semibold" htmlFor="username">

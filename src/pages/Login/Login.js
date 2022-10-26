@@ -72,19 +72,22 @@ const Login = ({ setLogin }) => {
 					{error}
 				</p>
 			)}
-			<form onSubmit={handleSubmit} className="w-1/3 mx-auto my-10">
+			<form
+				onSubmit={handleSubmit}
+				className="w-full px-10 my-10 sm:mx-auto sm:w-1/2"
+			>
 				<h1 className="mb-6 text-4xl text-center">Login</h1>
 				<div>
 					<label className="block my-3 font-semibold" htmlFor="email">
 						Email
 					</label>
-					<input className="w-full" type="email" name="email" />
+					<input className="w-full" type="email" name="email" required />
 				</div>
 				<div>
 					<label className="block my-3" htmlFor="password">
 						Passowrd
 					</label>
-					<input className="w-full" type="password" name="password" />
+					<input className="w-full" type="password" required name="password" />
 				</div>
 				<button
 					type="submit"

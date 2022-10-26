@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
 					{
 						path: "/courses",
 						loader: () => {
-							return fetch("http://localhost:5000/courses");
+							return fetch("https://learn-web-server-ten.vercel.app/courses");
 						},
 						element: <Cards></Cards>,
 					},
@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
 						path: "/courses/:categoryName",
 						loader: ({ params }) => {
 							return fetch(
-								`http://localhost:5000/courses/${params.categoryName}`
+								`https://learn-web-server-ten.vercel.app/courses/${params.categoryName}`
 							);
 						},
 						element: <Cards></Cards>,
@@ -55,13 +55,18 @@ export const router = createBrowserRouter([
 				path: "/course-details/:courseId",
 				loader: ({ params }) => {
 					return fetch(
-						`http://localhost:5000/course-details/${params.courseId}`
+						`https://learn-web-server-ten.vercel.app/course-details/${params.courseId}`
 					);
 				},
 				element: <CourseDetails></CourseDetails>,
 			},
 			{
-				path: "/checkout",
+				path: "/checkout/:id",
+				loader: ({ params }) => {
+					return fetch(
+						`https://learn-web-server-ten.vercel.app/checkout/${params.id}`
+					);
+				},
 				element: (
 					<PrivateRoute>
 						<Checkout></Checkout>

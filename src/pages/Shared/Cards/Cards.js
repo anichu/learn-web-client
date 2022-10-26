@@ -20,7 +20,7 @@ const Cards = () => {
 				)}
 			</h1>
 
-			<div className="grid items-center justify-center grid-cols-2 gap-5 mt-6">
+			<div className="grid items-center justify-center gap-5 mt-6 md:grid-cols-2 sm:grid-cols-1">
 				{courses.map((course) => {
 					return <Card course={course} key={course.id}></Card>;
 				})}
